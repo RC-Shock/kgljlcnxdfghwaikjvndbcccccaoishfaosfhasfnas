@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Player ONE - Shop</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="d:\PlayerONE\Codes\css\bootstrap.min.css.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="d:\PlayerONE\Pictures\logo1.png">
+
+    <style>
+        /* Shop Section */
+        .shop-container {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .shop-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .shop-item img {
+            width: 70%;
+            height: 320px; /* Fixed height for portrait images */
+            object-fit: auto;
+            border-radius: 20px;
+            margin-left: 50px;
+        }
+
+        .shop-item:hover {
+            transform: scale(1.05); 
+        }
+
+        /* Hover Overlay Effect */
+        .shop-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 320px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+            margin-left: 50px;
+        }
+
+        .shop-item:hover .shop-overlay {
+            opacity: 1;
+        }
+
+        .shop-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .shop-price {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+        #cart-notification {
+        display: none;
+        position: fixed;
+        margin-top: 50px;
+        left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 9999; 
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.3s ease-in-out;
+    }
+    
+
+    /* Navbar Styles */
+    .navbar {
+        z-index: 1;  /* Lower z-index for navbar */
+    }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="d:/PlayerONE/Pictures/logo1.png" style="width: 50px; height: 50px;" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="d:\PlayerONE\Codes\user.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shop.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">Cart</a>
+          </li>
+  
+          <!-- Settings Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Settings
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end bg-dark text-white" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item text-white" href="#">My account</a></li>
+              <li><a class="dropdown-item text-white" href="d:\PlayerONE\Codes\about.html">About</a></li>
+              <li><a class="dropdown-item text-white" href="d:\PlayerONE\Codes\faq.html">FAQ</a></li>
+              <li><a class="dropdown-item text-white" href="d:\PlayerONE\Codes\services.html">Services</a></li>
+              <li><a class="dropdown-item text-white" href="d:\PlayerONE\Codes\contact.html">Contact Us</a></li>
+              <li><hr class="dropdown-divider bg-secondary"></li>
+              <li><a class="dropdown-item text-white" href="d:/PlayerONE/Codes/homepage.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <!-- SHOP SECTION -->
+  <section class="shop-container">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
+     <h2 class="text-center">Shop Games</h2>
+      <input type="search" id="searchInput" placeholder="Search for items..." class="form-control w-auto fs-5" style="max-width: 250px;">
+    </div>
+
+    <div class="row g-4">
+      <div id="cart-notification" class="alert alert-success" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 1000;">
+        <strong>Success!</strong> Item added to your cart.
+      </div>
+                <!-- Game 1 -->
+                <div class="col-md-4">
+                    <div class="shop-item">
+                        <img src="d:\PlayerONE\Pictures\hitmancover.png" alt="Game 1">
+                        <div class="shop-overlay">
+                            <center> <div class="shop-title">Hitman: World of Assassination</div> </center>
+                            <div class="shop-price">₱1,950.00</div>
+                            <br>
+                            <button class="btn btn-dark" onclick="addToCart('Hitman: World of Assassination', 1950.00, this)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 2 -->
+                <div class="col-md-4">
+                    <div class="shop-item">
+                        <img src="d:\PlayerONE\Pictures\p_silenthill2.png" alt="Game 2">
+                        <div class="shop-overlay">
+                            <div class="shop-title">Silent Hill 2</div>
+                            <div class="shop-price">₱1,996.00</div>
+                            <br>
+                            <button class="btn btn-dark" onclick="addToCart('Silent Hill 2', 1996.00, this)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 3 -->
+                <div class="col-md-4">
+                    <div class="shop-item">
+                        <img src="d:\PlayerONE\Pictures\MiSideCoverArt.png" alt="Game 3">
+                        <div class="shop-overlay">
+                            <div class="shop-title">Miside</div>
+                            <div class="shop-price">₱485.00</div>
+                            <br>
+                            <button class="btn btn-dark" onclick="addToCart('Miside', 485.00, this)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Second Row -->
+        <div class="row g-4 mt-4"> <!-- Added a margin-top for spacing -->
+            <div class="col-md-4">
+                <div class="shop-item">
+                    <img src="d:\PlayerONE\Pictures\p_cbpunk2077.png" alt="Game 4">
+                    <div class="shop-overlay">
+                        <div class="shop-title">Cyberpunk 2077</div>
+                        <div class="shop-price">₱1,040.00</div>
+                        <br>
+                        <button class="btn btn-dark" onclick="addToCart('Cyberpunk 2077', 1040.00, this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="shop-item">
+                    <img src="d:\PlayerONE\Pictures\getting over it.png" alt="Game 5">
+                    <div class="shop-overlay">
+                        <div class="shop-title">Getting Over It</div>
+                        <div class="shop-price">₱200.00</div>
+                        <br>
+                        <button class="btn btn-dark" onclick="addToCart('Getting Over It', 200.00, this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="shop-item">
+                    <img src="d:\PlayerONE\Pictures\doom cover.png" alt="Game 6">
+                    <div class="shop-overlay">
+                        <div class="shop-title">Doom Eternal</div>
+                        <div class="shop-price">₱1,200.00</div>
+                        <br>
+                        <button class="btn btn-dark" onclick="addToCart('Doom Eternal', 1200.00, this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Third Row -->
+         <div class="row g-4 mt-4"> <!-- Added a margin-top for spacing -->
+            <div class="col-md-4">
+                <div class="shop-item">
+                    <img src="..\Pictures\wukong,png" alt="Game 7">
+                    <div class="shop-overlay">
+                        <div class="shop-title">Black Myth: Wukong</div>
+                        <div class="shop-price">₱2,599.00</div>
+                        <br>
+                        <button class="btn btn-dark" onclick="addToCart('Black Myth: Wukong', 2599.00, this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="shop-item">
+                    <img src="d:\PlayerONE\Pictures\tabs.png" alt="Game 8">
+                    <div class="shop-overlay">
+                        <div class="shop-title"><center>Totally Accurate Battle Simulator</center></div>
+                        <div class="shop-price">₱625.00</div>
+                        <br>
+                        <button class="btn btn-dark" onclick="addToCart('Totally Accurate Battle Simulator', 625.00, this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="shop-item">
+                    <img src="d:\PlayerONE\Pictures\little misfortune.png" alt="Game 9">
+                    <div class="shop-overlay">
+                        <div class="shop-title">Little Misfortune</div>
+                        <div class="shop-price">₱450.00</div>
+                        <br>
+                        <button class="btn btn-dark" onclick="addToCart('Little Misfortune', 450.00, this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+</div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p>&copy; 2025 Player ONE. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="d:\PlayerONE\Codes\js\bootstrap.bundle.js"></script>
+    <script>
+function addToCart(itemName, itemPrice, btn) {
+    // Retrieve existing cart or start a new one
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Add the new item
+    cart.push({ name: itemName, price: itemPrice });
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Console log for debug
+    console.log("Item added:", itemName);
+
+    // Show a notification for added item
+    showNotification(itemName);
+
+    // Disable the button that was clicked
+    if (btn) {
+        btn.disabled = true;
+        btn.innerText = "Added to Cart";
+        btn.classList.add("disabled");
+    }
+}
+
+function showNotification(itemName) {
+    // Get the notification element
+    let notification = document.getElementById("cart-notification");
+    
+    // Set a custom message
+    notification.innerHTML = `<strong>Success!</strong> ${itemName} added to your cart.`;
+    
+    // Show the notification
+    notification.style.display = "block";
+
+    // Hide the notification after 3 seconds
+    setTimeout(function() {
+        notification.style.display = "none";
+    }, 3000); // 3000ms = 3 seconds
+}
+
+const searchInput = document.getElementById('searchInput');
+  const allShopItems = document.querySelectorAll('.col-md-4');
+
+  searchInput.addEventListener('input', function () {
+    const filter = searchInput.value.toLowerCase();
+
+    allShopItems.forEach(item => {
+      const titleElement = item.querySelector('.shop-title');
+      if (titleElement) {
+        const title = titleElement.textContent.toLowerCase();
+        item.style.display = title.includes(filter) ? '' : 'none';
+      }
+    });
+  });
+    </script>
+</body>
+</html>

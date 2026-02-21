@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Player ONE - Transaction</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="d:/PlayerONE/Codes/css/bootstrap.min.css.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="d:/PlayerONE/Pictures/logo1.png">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="d:/PlayerONE/Pictures/logo1.png" style="width: 50px; height: 50px;" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="d:/PlayerONE/Codes/user.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Cart</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Settings
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end bg-dark text-white" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item text-white" href="#">My account</a></li>
+                            <li><a class="dropdown-item text-white" href="d:/PlayerONE/Codes/about.html">About</a></li>
+                            <li><a class="dropdown-item text-white" href="d:/PlayerONE/Codes/faq.html">FAQ</a></li>
+                            <li><a class="dropdown-item text-white" href="d:/PlayerONE/Codes/services.html">Services</a></li>
+                            <li><a class="dropdown-item text-white" href="d:/PlayerONE/Codes/contact.html">Contact Us</a></li>
+                            <li><hr class="dropdown-divider bg-secondary"></li>
+                            <li><a class="dropdown-item text-white" href="d:/PlayerONE/Codes/homepage.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PARALLAX SECTION -->
+    <section class="parallax" style="background-image: url('d:/PlayerONE/Pictures/wlp2.jpg');">
+        <div> 
+            <p> Transaction Details </p>
+        </div>
+    </section>
+
+    <!-- TRANSACTION FORM -->
+    <section class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h3 class="text-center mb-4 mt-3">Complete Your Purchase</h3>
+                    <form id="transactionForm">
+                        <!-- Display Cart Items -->
+                        <div class="mb-3">
+                            <h5>Your Items</h5>
+                            <ul id="transaction-items" class="list-group">
+                                <!-- Cart items will be displayed here dynamically -->
+                            </ul>
+                        </div>
+
+                        <!-- Total Amount -->
+                        <div class="mb-3">
+                            <label for="totalAmount" class="form-label">Total Amount</label>
+                            <input type="text" class="form-control" id="totalAmount" value="₱0.00" disabled>
+                        </div>
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Shipping Address</label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="Enter your shipping address" required></textarea>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="mb-3">
+                            <label for="paymentMethod" class="form-label">Payment Method</label>
+                            <select class="form-select" id="paymentMethod" required>
+                                <option value="" disabled selected>Select payment method</option>
+                                <option value="creditCard">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="bankTransfer">Bank Transfer</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-success w-100">Confirm Purchase</button>
+                    </form>
+
+                    <!-- Back Button -->
+                    <a href="cart.html" class="back-button d-block text-center mt-3">Back to Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p>&copy; 2025 Player ONE. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="d:/PlayerONE/Codes/js/bootstrap.bundle.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTransactionDetails(); // Load cart items and total when the page loads
+        });
+
+        function loadTransactionDetails() {
+            let cartDetails = JSON.parse(localStorage.getItem("cartDetails"));
+            
+            if (cartDetails) {
+                let totalAmount = 0;
+                let cartItems = cartDetails.items;
+                let itemsList = document.getElementById("transaction-items");
+
+                cartItems.forEach(item => {
+                    totalAmount += item.price;
+
+                    let li = document.createElement("li");
+                    li.className = "list-group-item d-flex justify-content-between align-items-center";
+                    li.innerHTML = `${item.name} - ₱${item.price.toFixed(2)}`;
+                    itemsList.appendChild(li);
+                });
+
+                // Set the total amount
+                document.getElementById("totalAmount").value = "₱" + totalAmount.toFixed(2);
+            }
+        }
+
+        // Handle form submission to finalize the transaction
+        document.getElementById("transactionForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Clear cart from localStorage after purchase
+            localStorage.removeItem("cart");
+            localStorage.removeItem("cartDetails");
+
+            // Redirect to cart page (empty cart)
+            alert("Purchase complete! Redirecting to Cart...");
+            window.location.href = "cart.html";
+        });
+    </script>
+</body>
+</html>
